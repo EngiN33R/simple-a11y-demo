@@ -35,7 +35,12 @@ export default function Welcome() {
         </div>
         <div className="flex-1 w-full">
           <div className="mx-auto -mt-16 bg-white rounded-lg shadow-md border border-solid border-gray-200 py-8 px-6 min-w-[600px] w-min flex flex-col gap-4">
-            <img src="/signup.svg" className="w-9/12 mx-auto" />
+            <img
+              src="/signup.svg"
+              className="w-9/12 mx-auto"
+              aria-hidden="true"
+              alt=""
+            />
             <div>
               <h3 className="text-lg font-bold mb-2 text-neutral-700">
                 Email <span className="text-red-600">*</span>
