@@ -3,6 +3,7 @@ import styles from "./checkbox.module.css";
 
 type CheckboxProps = {
   name?: string;
+  id?: string;
   value?: boolean;
   defaultValue?: boolean;
   onChange?: (value: boolean) => void;
@@ -36,6 +37,7 @@ export const Checkbox = (props: CheckboxProps) => {
       <input
         type="checkbox"
         name={props.name}
+        id={props.id}
         checked={checked}
         onChange={handleChange}
         className="absolute inset-0 opacity-0 cursor-pointer"

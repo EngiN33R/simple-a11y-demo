@@ -42,30 +42,45 @@ export default function Welcome() {
               alt=""
             />
             <div>
-              <h3 className="text-lg font-bold mb-2 text-neutral-700">
+              <label
+                htmlFor="email"
+                className="block text-lg font-bold mb-2 text-neutral-700"
+              >
                 Email <span className="text-red-600">*</span>
-              </h3>
+              </label>
               <Input
+                name="email"
+                id="email"
                 onChange={(e) =>
                   setForm((f) => ({ ...f, email: e.currentTarget.value }))
                 }
               />
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-2 text-neutral-700">
+              <label
+                htmlFor="name"
+                className="block text-lg font-bold mb-2 text-neutral-700"
+              >
                 Name <span className="text-red-600">*</span>
-              </h3>
+              </label>
               <Input
+                name="name"
+                id="name"
                 onChange={(e) =>
                   setForm((f) => ({ ...f, name: e.currentTarget.value }))
                 }
               />
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-2 text-neutral-700">
+              <label
+                htmlFor="company"
+                className="block text-lg font-bold mb-2 text-neutral-700"
+              >
                 Company name
-              </h3>
+              </label>
               <Input
+                name="company"
+                id="company"
                 onChange={(e) =>
                   setForm((f) => ({ ...f, company: e.currentTarget.value }))
                 }
@@ -73,9 +88,13 @@ export default function Welcome() {
             </div>
             <div className="flex gap-3">
               <Checkbox
+                name="agree"
+                id="agree"
                 onChange={(value) => setForm((f) => ({ ...f, agree: value }))}
               />
-              <span>I agree to the privacy policy and terms of service</span>
+              <label htmlFor="agree">
+                I agree to the privacy policy and terms of service
+              </label>
             </div>
           </div>
         </div>
