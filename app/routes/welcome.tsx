@@ -51,6 +51,7 @@ export default function Welcome() {
               <Input
                 name="email"
                 id="email"
+                required
                 onChange={(e) =>
                   setForm((f) => ({ ...f, email: e.currentTarget.value }))
                 }
@@ -66,6 +67,7 @@ export default function Welcome() {
               <Input
                 name="name"
                 id="name"
+                required
                 onChange={(e) =>
                   setForm((f) => ({ ...f, name: e.currentTarget.value }))
                 }
