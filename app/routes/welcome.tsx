@@ -68,9 +68,12 @@ export default function Welcome() {
                   required: "Email is required",
                   onChange: (e) => void setValue("email", e.target.value),
                 })}
+                aria-errormessage="email-error"
+                aria-invalid={errors.email ? "true" : "false"}
+                className={errors.email ? "border-red-600" : ""}
               />
               {errors.email && (
-                <span className="text-red-600 text-sm">
+                <span id="email-error" className="text-red-600 text-sm">
                   {errors.email?.message}
                 </span>
               )}
@@ -91,9 +94,12 @@ export default function Welcome() {
                   required: "Name is required",
                   onChange: (e) => void setValue("name", e.target.value),
                 })}
+                aria-errormessage="name-error"
+                aria-invalid={errors.name ? "true" : "false"}
+                className={errors.name ? "border-red-600" : ""}
               />
               {errors.name && (
-                <span className="text-red-600 text-sm">
+                <span id="name-error" className="text-red-600 text-sm">
                   {errors.name?.message}
                 </span>
               )}
@@ -120,13 +126,16 @@ export default function Welcome() {
                     required: "You must agree to the terms",
                     onChange: (e) => void setValue("agree", e.target.checked),
                   })}
+                  aria-errormessage="agree-error"
+                  aria-invalid={errors.agree ? "true" : "false"}
+                  className={errors.agree ? "border-red-600" : ""}
                 />
                 <label htmlFor="agree">
                   I agree to the privacy policy and terms of service
                 </label>
               </div>
               {errors.agree && (
-                <span className="text-red-600 text-sm">
+                <span id="agree-error" className="text-red-600 text-sm">
                   {errors.agree?.message}
                 </span>
               )}
