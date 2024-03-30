@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useEffect, useState } from "react";
+import { Form } from "@remix-run/react";
+import { useForm } from "react-hook-form";
 import { Checkbox } from "~/components/Checkbox";
 import { Input } from "~/components/Input";
 
@@ -7,24 +8,34 @@ export const meta: MetaFunction = () => {
   return [{ title: "Welcome - Onboarding" }];
 };
 
-export default function Welcome() {
-  const [form, setForm] = useState({
-    email: "",
-    name: "",
-    company: "",
-    agree: false,
-  });
+type FormShape = {
+  email: string;
+  name: string;
+  company?: string;
+  agree: boolean;
+};
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
+const onSubmit = (data: FormShape) => {
+  console.log(data);
+};
+
+export default function Welcome() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<FormShape>();
 
   return (
     <div className="w-full h-full bg-slate-100 flex flex-col">
       <div className="w-full h-12 bg-blue-700 text-white flex items-center justify-center shadow-md">
         <span className="block font-bold text-2xl -mt-1">Logo</span>
       </div>
-      <div className="w-full items-center flex flex-col flex-1">
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full items-center flex flex-col flex-1"
+      >
         <div className="w-full flex flex-col items-center bg-white h-min pt-8 pb-24 rounded-b-full shadow-sm">
           <h1 className="text-4xl font-bold text-blue-700">
             Welcome to Applifyzr.io
@@ -46,32 +57,46 @@ export default function Welcome() {
                 htmlFor="email"
                 className="block text-lg font-bold mb-2 text-neutral-700"
               >
-                Email <span className="text-red-600">*</span>
+                Email{" "}
+                <span className="text-red-600" aria-hidden="true">
+                  *
+                </span>
               </label>
               <Input
-                name="email"
                 id="email"
-                required
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, email: e.currentTarget.value }))
-                }
+                {...register("email", {
+                  required: "Email is required",
+                  onChange: (e) => void setValue("email", e.target.value),
+                })}
               />
+              {errors.email && (
+                <span className="text-red-600 text-sm">
+                  {errors.email?.message}
+                </span>
+              )}
             </div>
             <div>
               <label
                 htmlFor="name"
                 className="block text-lg font-bold mb-2 text-neutral-700"
               >
-                Name <span className="text-red-600">*</span>
+                Name{" "}
+                <span className="text-red-600" aria-hidden="true">
+                  *
+                </span>
               </label>
               <Input
-                name="name"
                 id="name"
-                required
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, name: e.currentTarget.value }))
-                }
+                {...register("name", {
+                  required: "Name is required",
+                  onChange: (e) => void setValue("name", e.target.value),
+                })}
               />
+              {errors.name && (
+                <span className="text-red-600 text-sm">
+                  {errors.name?.message}
+                </span>
+              )}
             </div>
             <div>
               <label
@@ -81,22 +106,30 @@ export default function Welcome() {
                 Company name
               </label>
               <Input
-                name="company"
                 id="company"
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, company: e.currentTarget.value }))
-                }
+                {...register("company", {
+                  onChange: (e) => void setValue("company", e.target.value),
+                })}
               />
             </div>
-            <div className="flex gap-3">
-              <Checkbox
-                name="agree"
-                id="agree"
-                onChange={(value) => setForm((f) => ({ ...f, agree: value }))}
-              />
-              <label htmlFor="agree">
-                I agree to the privacy policy and terms of service
-              </label>
+            <div>
+              <div className="flex gap-3">
+                <Checkbox
+                  id="agree"
+                  {...register("agree", {
+                    required: "You must agree to the terms",
+                    onChange: (e) => void setValue("agree", e.target.checked),
+                  })}
+                />
+                <label htmlFor="agree">
+                  I agree to the privacy policy and terms of service
+                </label>
+              </div>
+              {errors.agree && (
+                <span className="text-red-600 text-sm">
+                  {errors.agree?.message}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -105,12 +138,15 @@ export default function Welcome() {
             <button className="bg-gray-500 hover:bg-gray-600 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1">
               Previous
             </button>
-            <button className="bg-blue-700 hover:bg-blue-800 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1">
+            <button
+              type="submit"
+              className="bg-blue-700 hover:bg-blue-800 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1"
+            >
               Next
             </button>
           </div>
         </div>
-      </div>
+      </Form>
     </div>
   );
 }

@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./checkbox.module.css";
+import { ChangeHandler } from "react-hook-form";
 
 type CheckboxProps = {
   name?: string;
   id?: string;
   value?: boolean;
   defaultValue?: boolean;
-  onChange?: (value: boolean) => void;
+  onChange?: ChangeHandler;
   className?: string;
 }
 
 export const Checkbox = (props: CheckboxProps) => {
+  const { onChange, name } = props;
   const [checked, setChecked] = useState(props.value ?? props.defaultValue ?? false);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,8 +26,8 @@ export const Checkbox = (props: CheckboxProps) => {
   }, [props.value]);
 
   useEffect(() => {
-    props.onChange?.(checked);
-  }, [checked]);
+    onChange?.({ target: { name, checked, value: checked } });
+  }, [checked, name, onChange]);
 
   return (
     <div className="relative w-6 h-6">
