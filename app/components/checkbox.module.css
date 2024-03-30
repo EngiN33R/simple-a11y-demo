@@ -1,0 +1,3 @@
+.checkbox:has(+ input[type="checkbox"]:focus) {
+  border-color: rgb(29 78 216 / var(--tw-border-opacity));
+}
