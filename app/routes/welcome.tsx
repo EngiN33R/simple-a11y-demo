@@ -29,22 +29,22 @@ export default function Welcome() {
 
   return (
     <div className="w-full h-full bg-slate-100 flex flex-col">
-      <div className="w-full h-12 bg-blue-700 text-white flex items-center justify-center shadow-md">
+      <header className="w-full h-12 bg-blue-700 text-white flex items-center justify-center shadow-md">
         <span className="block font-bold text-2xl -mt-1">Logo</span>
-      </div>
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full items-center flex flex-col flex-1"
-      >
-        <div className="w-full flex flex-col items-center bg-white h-min pt-8 pb-24 rounded-b-full shadow-sm">
+      </header>
+      <main className="flex-1 flex flex-col">
+        <section className="w-full flex flex-col items-center bg-white h-min pt-8 pb-24 rounded-b-full shadow-sm">
           <h1 className="text-4xl font-bold text-blue-700">
             Welcome to Applifyzr.io
           </h1>
           <p className="mt-4 text-lg text-center">
             This is a sample app to demonstrate accessibility features.
           </p>
-        </div>
-        <div className="flex-1 w-full">
+        </section>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full items-center flex flex-col flex-1 justify-between"
+        >
           <div className="mx-auto -mt-16 bg-white rounded-lg shadow-md border border-solid border-gray-200 py-8 px-6 min-w-[600px] w-min flex flex-col gap-4">
             <img
               src="/signup.svg"
@@ -134,28 +134,23 @@ export default function Welcome() {
                   I agree to the privacy policy and terms of service
                 </label>
               </div>
-              {errors.agree && (
-                <span id="agree-error" className="text-red-600 text-sm">
-                  {errors.agree?.message}
-                </span>
-              )}
             </div>
           </div>
-        </div>
-        <div className="bg-white shadow-top w-full py-8">
-          <div className="mx-auto w-[600px] flex justify-between gap-12">
-            <button className="bg-gray-500 hover:bg-gray-600 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1">
-              Previous
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-700 hover:bg-blue-800 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1"
-            >
-              Next
-            </button>
+          <div className="bg-white shadow-top w-full py-8">
+            <div className="mx-auto w-[600px] flex justify-between gap-12">
+              <button className="bg-gray-500 hover:bg-gray-600 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1">
+                Previous
+              </button>
+              <button
+                type="submit"
+                className="bg-blue-700 hover:bg-blue-800 transition-colors font-bold text-white px-12 py-3 rounded-md flex-1"
+              >
+                Next
+              </button>
+            </div>
           </div>
-        </div>
-      </Form>
+        </Form>
+      </main>
     </div>
   );
 }
